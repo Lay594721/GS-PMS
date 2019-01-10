@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zking.mapper.ModelMapper">
+  <resultMap id="BaseResultMap" type="com.zking.model.Model">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="text" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, text, url
+  </sql>
+  <select id="queryModel" resultType="com.zking.model.Model">
+    SELECT <include refid="Base_Column_List" /> FROM t_model
+  </select>
+  <select id="queryModelId" resultType="com.zking.model.Model">
+
+    SELECT <include refid="Base_Column_List" /> FROM t_model WHERE pid=#{Id}
+  </select>
+
+
+</mapper>

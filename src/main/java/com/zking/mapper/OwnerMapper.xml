@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.OwnerMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.Owner" >
+    <constructor >
+      <arg column="o_number" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="o_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_ownerphone" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="o_jdata" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="o_carder" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_company" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_birthday" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_man" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_tel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="t_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="T_element" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="T_house" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="o_check_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    o_number, o_name, o_state, o_ownerphone, o_jdata, o_carder, o_sex, o_company,
+    o_birthday, o_phone, o_remarks, o_man, o_tel, o_address,  t_number, T_element,
+    T_house, o_check_date,o_image
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_owner
+    where o_number = #{o_number,jdbcType=VARCHAR}
+  </select>
+  <select id="queryOwnerList" resultType="com.zking.model.Owner">
+    SELECT o_number, o_name, d.dict_name o_state, o_ownerphone, o_jdata, o_carder, o_sex, o_company,
+    o_birthday, o_phone, o_remarks, o_man, o_tel, o_address,  t_number, T_element,
+    T_house, o_check_date,o_image FROM t_owner o LEFT JOIN  t_dict d
+    ON o.o_state=d.dict_id
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_owner
+    where o_number = #{o_number,jdbcType=VARCHAR}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.zking.model.Owner" >
+    insert into t_owner (o_number, o_name,
+      o_state, o_ownerphone, o_jdata, 
+      o_carder, o_sex, o_company, 
+      o_birthday, o_phone, o_remarks, 
+      o_man, o_tel, o_address, 
+      t_number, T_element,
+      T_house, o_check_date,o_image)
+    values (#{o_number,jdbcType=INTEGER}, #{o_name,jdbcType=VARCHAR},
+      #{o_state,jdbcType=VARCHAR}, #{o_ownerphone,jdbcType=INTEGER}, #{o_jdata,jdbcType=TIMESTAMP}, 
+      #{o_carder,jdbcType=VARCHAR}, #{o_sex,jdbcType=VARCHAR}, #{o_company,jdbcType=VARCHAR}, 
+      #{o_birthday,jdbcType=VARCHAR}, #{o_phone,jdbcType=VARCHAR}, #{o_remarks,jdbcType=VARCHAR}, 
+      #{o_man,jdbcType=VARCHAR}, #{o_tel,jdbcType=VARCHAR}, #{o_address,jdbcType=VARCHAR}, 
+      #{t_number,jdbcType=VARCHAR}, #{t_element,jdbcType=VARCHAR},
+      #{t_house,jdbcType=VARCHAR}, #{o_check_date,jdbcType=TIMESTAMP},#{o_image,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.Owner" >
+    update t_owner
+    set
+      o_name = #{o_name,jdbcType=VARCHAR},
+      o_state = #{o_state,jdbcType=VARCHAR},
+      o_ownerphone = #{o_ownerphone,jdbcType=INTEGER},
+      o_jdata = #{o_jdata,jdbcType=TIMESTAMP},
+      o_carder = #{o_carder,jdbcType=VARCHAR},
+      o_sex = #{o_sex,jdbcType=VARCHAR},
+      o_company = #{o_company,jdbcType=VARCHAR},
+      o_birthday = #{o_birthday,jdbcType=VARCHAR},
+      o_phone = #{o_phone,jdbcType=VARCHAR},
+      o_remarks = #{o_remarks,jdbcType=VARCHAR},
+      o_man = #{o_man,jdbcType=VARCHAR},
+      o_tel = #{o_tel,jdbcType=VARCHAR},
+      o_address = #{o_address,jdbcType=VARCHAR},
+      t_number = #{t_number,jdbcType=VARCHAR},
+      T_element = #{t_element,jdbcType=VARCHAR},
+      T_house = #{t_house,jdbcType=VARCHAR},
+      o_check_date = #{o_check_date,jdbcType=TIMESTAMP},
+      o_image=#{o_image,jdbcType=VARCHAR}
+    where o_number = #{o_number,jdbcType=VARCHAR}
+  </update>
+</mapper>
